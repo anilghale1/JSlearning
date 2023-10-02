@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas 
+     width="300"
+     height="300"
+     id = "canvas"
+     style= "border : 2px solid black" >
+     </canvas>
+</body>
+
+<script>
+    let canvas = document.getElementById("canvas");
+     let context = canvas.getContext("2d");
+        
+     //board for traffic light
+     context.beginPath();
+     context.fillStyle = "black";
+     context.rect(0,0,100,230);
+     context.fill();
+
+     //red circle
+     context.beginPath();
+     context.fillStyle = "red";
+     context.arc(50,50,25,0,360);
+     context.fill();
+
+     //orange circle
+     context.beginPath();
+     context.fillStyle = "orange";
+     context.arc(50,120,25,0,360);
+     context.fill();
+
+      //greem circle
+      context.beginPath();
+     context.fillStyle = "green";
+     context.arc(50,180,25,0,360);
+     context.fill();
+
+
+     
+</script>
+</html>
