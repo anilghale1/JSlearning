@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVent</title>
+</head>
+<body>
+    <!-- <div id="room"   style="background-color: red; padding: 5px;">
+        Hey there
+    </div> -->
+    <canvas 
+    style="background-color: black"
+    id="canvas"
+    width="300px"
+    height="300px"
+    >
+
+    </canvas>
+    
+
+    <script>
+        // const room = document.getElementById("room");
+        //   room.addEventListener("mousemove",  ()  =>
+        // {
+        //     console.log("Open the door");
+        // });
+
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+
+        
+        
+
+        canvas.addEventListener("mousemove", (event) => {
+            console.log(event.clientX, event.clientY);
+            context.clearRect(0,0,300,300);
+            context.beginPath();
+        context.fillStyle = "red";
+        context.arc(event.clientX,event.clientY,10,0,360);
+        context.fill();
+        })
+
+         document.addEventListener("keydown", (event) =>{
+           
+             console.log("key has been pressed", event);
+         })
+
+
+
+    </script>
+</body>
+</html>
