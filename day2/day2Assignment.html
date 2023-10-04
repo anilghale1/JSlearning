@@ -22,27 +22,35 @@
     <script>
         const canvas = document.getElementById("canvas");
         const context = canvas.getContext("2d");
+
+
+
+
        
             canvas.addEventListener("mousemove", (event) => {
             const canvasRect = canvas.getBoundingClientRect();
             const offsetX = event.clientX - canvasRect.left;
             const offsetY = event.clientY - canvasRect.top;
-           
-            context.clearRect(0, 0, canvas.width, canvas.height);
             
-             let color = getRandomColor();
+             context.clearRect(0, 0, canvas.width, canvas.height);
+            
+             let color1 = getRandomColor();
+             let color2 = getRandomColor();
+             let color3 = getRandomColor();
+            //  console.log(color);
+             
             context.beginPath();
-            context.fillStyle = "red";
+            context.fillStyle = color1;
             context.arc(offsetX, offsetY, 50, 0, 360);
             context.fill();
 
             context.beginPath();
-            context.fillStyle = "blue";
+            context.fillStyle = color2;
             context.arc(offsetX, offsetY, 40, 0, 360);
             context.fill();
 
             context.beginPath();
-            context.fillStyle = "orange";
+            context.fillStyle = color3;
             context.arc(offsetX, offsetY, 30, 0, 360);
             context.fill();
         });
@@ -69,7 +77,11 @@
             context.fill();
           }
 
-          function getRandomColor() {
+          
+
+        })
+
+        function getRandomColor() {
                 const letters = "0123456789ABCDEF";
                 let color = "#";
                 for (let i = 0; i < 6; i++) {
@@ -77,8 +89,6 @@
             }
                 return color;
             }
-
-        })
 
 
 
