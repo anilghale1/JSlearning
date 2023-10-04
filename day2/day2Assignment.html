@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVent</title>
+</head>
+<body>
+
+    <h1>JavaScript Canvas</h1>
+   
+    <canvas 
+    style="background-color: black"
+    id="canvas"
+    width="500px"
+    height="400px"
+    >
+
+    </canvas>
+    
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+
+            canvas.addEventListener("mousemove", (event) => {
+            const canvasRect = canvas.getBoundingClientRect();
+            const offsetX = event.clientX - canvasRect.left;
+            const offsetY = event.clientY - canvasRect.top;
+            
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            
+            context.beginPath();
+            context.fillStyle = "blue";
+            context.arc(offsetX, offsetY, 30, 0, 360);
+            context.fill();
+
+            context.beginPath();
+            context.fillStyle = "red";
+            context.arc(offsetX, offsetY, 20, 0, 360);
+            context.fill();
+
+            context.beginPath();
+            context.fillStyle = "orange";
+            context.arc(offsetX, offsetY, 10, 0, 360);
+            context.fill();
+        });
+
+        canvas.addEventListener("click", (event) => {
+
+            for(let i = 1; i<= 750; i++)
+            {
+            let radius = Math.random() * 30 + 10; 
+            let randomColor = getRandomColor();
+            context.beginPath();
+            context.fillStyle = randomColor;
+            context.arc(Math.random() * 500, Math.random() * 400, radius = radius - 10, 0, 360);
+            context.fill();
+            }
+
+            for(let i = 1; i<=150; i++)
+
+            {
+            let randomColor = getRandomColor();
+            context.beginPath();
+            context.fillStyle = randomColor;
+            context.rect(Math.random() * 500, Math.random() * 400, 2,2);
+            context.fill();
+          }
+
+          function getRandomColor() {
+                const letters = "0123456789ABCDEF";
+                let color = "#";
+                for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+                return color;
+            }
+
+        })
+
+
+
+    </script>
+</body>
+</html>
