@@ -22,27 +22,28 @@
     <script>
         const canvas = document.getElementById("canvas");
         const context = canvas.getContext("2d");
-
+       
             canvas.addEventListener("mousemove", (event) => {
             const canvasRect = canvas.getBoundingClientRect();
             const offsetX = event.clientX - canvasRect.left;
             const offsetY = event.clientY - canvasRect.top;
-            
+           
             context.clearRect(0, 0, canvas.width, canvas.height);
             
+             let color = getRandomColor();
             context.beginPath();
-            context.fillStyle = "blue";
-            context.arc(offsetX, offsetY, 30, 0, 360);
+            context.fillStyle = "red";
+            context.arc(offsetX, offsetY, 50, 0, 360);
             context.fill();
 
             context.beginPath();
-            context.fillStyle = "red";
-            context.arc(offsetX, offsetY, 20, 0, 360);
+            context.fillStyle = "blue";
+            context.arc(offsetX, offsetY, 40, 0, 360);
             context.fill();
 
             context.beginPath();
             context.fillStyle = "orange";
-            context.arc(offsetX, offsetY, 10, 0, 360);
+            context.arc(offsetX, offsetY, 30, 0, 360);
             context.fill();
         });
 
