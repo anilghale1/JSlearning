@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Box</title>
+</head>
+<body>
+    <h1>Moving Ball</h1>
+    <canvas style="background-color: red" id="canvas" width="300" height="300"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const c = canvas.getContext("2d");
+
+        let boxX = 0;
+        let boxY = 0;
+
+
+        function getRandomCircle()
+            {
+                for(let i = 1; i<= 750; i++)
+            {
+            let radius = Math.random() * 30 + 10; 
+            let randomColor = getRandomColor();
+            c.beginPath();
+            c.fillStyle = randomColor;
+            c.arc(Math.random() * 500, Math.random() * 400, radius = radius - 10, 0, 360);
+            c.fill();
+            }
+            }
+
+
+        function renderBox(x, y) {
+            c.clearRect(0, 0, canvas.width, canvas.height);
+            c.beginPath();
+            c.arc(x, y,25, 0, 360);
+            c.fill();
+        }
+
+        function moveBoxDown() {
+            boxY += 1;
+            renderBox(boxX, boxY);
+            requestAnimationFrame(moveBoxDown);
+
+            if(boxY >= 250)
+            {
+                canvas.style.backgroundColor = getRandomColor();
+               getRandomCircle();
+              boxY = 1;
+
+              
+
+              
+              
+            }
+        }
+
+       
+        canvas.addEventListener("click", (event) => {
+            const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+            const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+            boxX = mouseX;
+            boxY = mouseY;
+            moveBoxDown(); 
+          
+        });
+
+
+        function getRandomColor() {
+                const letters = "0123456789ABCDEF";
+                let color = "#";
+                for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+                return color;
+            }
+
+           
+
+    </script>
+</body>
+</html>
