@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: white;
+    }
+</style>
+<body>
+    <h1>Random Art</h1>
+
+    <canvas id="canvas" height="400px" width="500px" style="background-color: whitesmoke;"></canvas>
+
+
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext("2d");
+
+        let x = Math.random() * (canvas.width - 100) + 50; // Ensure x stays within canvas boundaries
+        let y = Math.random() * (canvas.height - 200) + 100; // Ensure y stays within canvas boundaries
+        const stickHeight = 5;
+        const candyRadius = Math.random() * (25-1) + 1;
+        let directionX = 1;
+        let directionY = 1;
+        
+
+        function randomCircle() {
+            setInterval(() => {
+              //  context.clearRect(0, 0, canvas.width, canvas.height);
+
+              let randomColor = getRandomColor();
+                // Draw stick
+                context.beginPath();
+                context.moveTo(x, y);
+                context.lineTo(x, y - stickHeight);
+                context.lineWidth = 2;
+                context.strokeStyle = randomColor; // Brown color for the stick
+                context.stroke();
+
+                // // Draw candy
+                // context.beginPath();
+                // context.arc(x, y - stickHeight, candyRadius, 0, 2 * Math.PI);
+                // context.fillStyle = getRandomColor();
+                // context.fill();
+
+                // Update position
+                x += directionX * Math.random() * 2; // Random horizontal movement
+                y += directionY * Math.random() * 2; // Random vertical movement
+
+                // Check boundaries
+                if (x < candyRadius || x > canvas.width - candyRadius) {
+                    directionX *= -1; // Reverse horizontal direction
+                }
+                if (y < stickHeight + candyRadius || y > canvas.height - candyRadius) {
+                    directionY *= -1; // Reverse vertical direction
+                }
+
+            }, 100);
+        }
+
+           
+
+       
+
+
+        function getRandomColor() {
+                const letters = "0123456789ABCDEF";
+                let color = "#";
+                for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+                return color;
+            }
+
+         //  randomCircle();
+
+
+           canvas.addEventListener("click", (event) => {
+            const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+            const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+            x = mouseX;
+            y = mouseY;
+                randomCircle(); 
+          
+        });
+    </script>
+</body>
+</html>
