@@ -3,7 +3,7 @@ const c = canvas.getContext("2d");
 const centerX = canvas.width / 2;
 const centerY = canvas.height / 2;
 const radius = 100; // Adjust the radius as needed
-const angularSpeed = 0.01; // Adjust the angular speed as needed
+const angularSpeed = 0.003; // Adjust the angular speed as needed
 const maxDistance = 5; // Maximum distance from the center
 
 class Tihar {
@@ -17,18 +17,28 @@ class Tihar {
         setInterval(() => {           
             this.color = this.getRandomColor();
         }, 200);
+
+        setInterval(() => {           
+            this.color1 = this.getRandomColor();
+        }, 100);
     }
 
     draw() {
-        c.beginPath();
-        c.arc(this.x, this.y, 10, 0, 2 * Math.PI);
-        c.fillStyle = `rgba(${this.color}, ${this.opacity})`;
-        c.fill();
+        for (let i = 0; i < 10; i++) {
+            const circleX = this.x + (this.distance + i * 5) * Math.cos(this.angle);
+            const circleY = this.y + (this.distance + i * 5) * Math.sin(this.angle);
+            c.beginPath();
+            c.arc(circleX, circleY, 10, 0, 2 * Math.PI);
+            c.fillStyle = `rgba(${this.color}, ${this.opacity})`; // Corrected variable name
+            c.fill();
+        }
+
+        
     }
 
     move() {
         if (this.distance < maxDistance) {
-            this.distance += 0.01; // Increase the distance from the center with a smaller increment
+            this.distance += 0.02; // Increase the distance from the center with a smaller increment
         }
         const expandFactor = Math.min(1, this.distance / 5); // Calculate the expand factor based on the distance
         this.x = centerX + (radius + this.distance) * Math.cos(this.angle) * expandFactor;
@@ -42,6 +52,7 @@ class Tihar {
 
     update() {
         this.move();
+        
     }
 
     getRandomColor() {
@@ -52,6 +63,18 @@ class Tihar {
             color += component + ",";
         }
         return color.slice(0, -1); // Remove the trailing comma
+    }
+
+    star()
+    {
+        for(let i = 1; i<=3; i++)
+
+        {
+         c.beginPath();
+        c.fillStyle = this.color1;
+        c.rect(Math.random() * 800, Math.random() * 800, 10,10);
+        c.fill();
+      } 
     }
 }
 
@@ -67,10 +90,25 @@ function animate() {
 
     for (let i = 0; i < 10; i++) {
         arr[i].update();
+
+        
+        
         arr[i].draw();
     }
 
+    
+    
+        arr[0].star();
+   
+    
+    
+
+    
+
+   
     requestAnimationFrame(animate);
 }
 
+
 animate();
+
